@@ -61,11 +61,10 @@ class SaveInterviewQuestionInput(BaseModel):
 )
 def save_interview_questions(interview_questions: List[str]) -> str:
     """
-    Creates a new project workbook for a client
+    Saves the interviewing questions for a client
 
     Parameters:
-    - project_title (float): The title of the project to create a workbook for.
-    - project_description (float): The description of the project.
+    - interview_questions (list[str]): The list of interview questions for the project.
 
     Returns:
     - A string representation of the result.
@@ -81,7 +80,7 @@ def save_interview_questions(interview_questions: List[str]) -> str:
         )
         # Add the content to the page
         notion_api.add_content_to_page(children=children_body)
-        return "Workbook created successfully!"
+        return "Interviewing questions saved successfully!"
 
     except Exception as e:
         return f"An error occurred while saving interview questions: {e}"
