@@ -123,6 +123,20 @@ class NotionAPI:
             )
             print(response.text)
 
+    def _generate_bulleted_list_items(self, contents):
+        contents_list = []
+        for content in contents:
+            child = {
+                "object": "block",
+                "type": "bulleted_list_item",
+                "bulleted_list_item": {
+                    "rich_text": [{"type": "text", "text": {"content": content}}]
+                },
+            }
+            contents_list.append(child)
+
+        return contents_list
+
     def generate_interview_questions_body(self, questions):
         """
         Generate a Notion-compatible body for interview questions.
@@ -136,17 +150,6 @@ class NotionAPI:
                 bulleted list items.
         """
 
-        questions_list = []
-        for question in questions:
-            child = {
-                "object": "block",
-                "type": "bulleted_list_item",
-                "bulleted_list_item": {
-                    "rich_text": [{"type": "text", "text": {"content": question}}]
-                },
-            }
-            questions_list.append(child)
-
         interview_questions = {
             "type": "heading_2",
             "heading_2": {
@@ -154,7 +157,7 @@ class NotionAPI:
                     {"type": "text", "text": {"content": "Interviewing Question"}}
                 ],
                 "is_toggleable": True,
-                "children": questions_list,
+                "children": self._generate_bulleted_list_items(questions),
             },
         }
 
@@ -162,31 +165,9 @@ class NotionAPI:
 
         return children
 
-    def generate_interview_questions_body_2(self, questions):
+    def generate_project_workbook_body(self):
 
-        questions_list = []
-        for question in questions:
-            child = {
-                "object": "block",
-                "type": "bulleted_list_item",
-                "bulleted_list_item": {
-                    "rich_text": [{"type": "text", "text": {"content": question}}]
-                },
-            }
-            questions_list.append(child)
-
-        interview_questions = {
-            "type": "heading_2",
-            "heading_2": {
-                "rich_text": [
-                    {"type": "text", "text": {"content": "Interviewing Question"}}
-                ],
-                "is_toggleable": True,
-                "children": questions_list,
-            },
-        }
-
-        children = [interview_questions]
+        children = []
 
         children.append(
             {
@@ -194,7 +175,18 @@ class NotionAPI:
                 "type": "heading_2",
                 "heading_2": {
                     "rich_text": [
-                        {"type": "text", "text": {"content": "Project Details"}}
+                        {"type": "text", "text": {"content": "Project Charter"}}
+                    ],
+                },
+            }
+        )
+        children.append(
+            {
+                "object": "block",
+                "type": "heading_3",
+                "heading_2": {
+                    "rich_text": [
+                        {"type": "text", "text": {"content": "Project Description"}}
                     ],
                 },
             }
