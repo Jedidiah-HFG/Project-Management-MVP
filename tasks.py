@@ -6,7 +6,7 @@ class PMTasks:
     def __tip_section(self):
         return "If you do your BEST WORK, you'll get a $10,000 bonus!"
 
-    def create_interviewing_questions(self, agent):
+    def create_interview_questions(self, agent):
         return Task(
             description=dedent(
                 f"""
@@ -20,12 +20,26 @@ class PMTasks:
             agent=agent,
         )
 
+    def save_interview_questions(self, agent):
+        return Task(
+            description=dedent(
+                f"""
+            **Task**: To save a list of interviewing questions for a client
+            **Description**: Save a list of interviewing questions for a client.
+
+            **Note**: {self.__tip_section()}
+        """
+            ),
+            expected_output="Interview questions saved successfully!",
+            agent=agent,
+        )
+
     def create_project_workbook(self, agent):
         return Task(
             description=dedent(
                 f"""
             **Task**: To create a project workbook for a client
-            **Description**: Create a comprehensive project workbook for a client, in accordance with the PMBOK Standard .
+            **Description**: Create a comprehensive project workbook for a client, in accordance with the PMBOK Standard.
 
             **Note**: {self.__tip_section()}
         """

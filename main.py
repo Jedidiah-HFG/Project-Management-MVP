@@ -21,10 +21,10 @@ class PMCrew:
         writing_agent = agents.writing_agent()
 
         # Create tasks and assign agents to them
-        create_interviewing_questions = tasks.create_interviewing_questions(
+        create_interview_questions = tasks.create_interview_questions(
             agent=interviewing_agent
         )
-
+        save_interview_questions = tasks.save_interview_questions(agent=writing_agent)
         create_project_workbook = tasks.create_project_workbook(
             agent=writing_agent,
         )
@@ -42,7 +42,8 @@ class PMCrew:
                 writing_agent,
             ],
             tasks=[
-                create_interviewing_questions,
+                create_interview_questions,
+                save_interview_questions,
                 create_project_workbook,
                 answer_question_from_transcript,
             ],

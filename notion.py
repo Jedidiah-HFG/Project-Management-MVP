@@ -1,94 +1,218 @@
-import requests
 import os
-from pprint import pprint
+import json
+import requests
 
-# Retrieve the Notion API key from environment variable
-NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
 
-# API endpoint
-url = "https://api.notion.com/v1/pages"
+class NotionAPI:
 
-# Headers
-headers = {
-    "Authorization": f"Bearer {NOTION_API_KEY}",
-    "Content-Type": "application/json",
-    "Notion-Version": "2022-06-28",
-}
+    def __init__(self, client_id: str):
 
-# Request body
-data = {
-    "parent": {"type": "page_id", "page_id": "343f6e7933e043629c38d81ee01d789f"},
-    "icon": {"emoji": "👨‍💻"},
-    "cover": {
-        "external": {
-            "url": "https://images.unsplash.com/photo-1526948531399-320e7e40f0ca?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        # Retrieve the Notion API key from environment variable
+        NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
+
+        # Load the clients data
+        self.CLIENTS_DATA = self._load_clients_data()
+
+        # Store the client ID
+        self.client_id = client_id
+        self.client_data = self.CLIENTS_DATA[client_id]
+
+        self.notion_page_id = self.client_data["notion_page_id"]
+
+        # Create the headers for the API requests
+        self.headers = {
+            "Authorization": f"Bearer {NOTION_API_KEY}",
+            "Content-Type": "application/json",
+            "Notion-Version": "2022-06-28",
         }
-    },
-    "properties": {
-        "title": [{"text": {"content": "Dan's Workbook"}}],
-    },
-    "children": [
-        {
-            "object": "block",
-            "type": "bulleted_list_item",
-            "bulleted_list_item": {
-                "rich_text": [
-                    {
-                        "type": "text",
-                        "text": {
-                            "content": "Can you tell us more about your goals and objectives for this project?"
-                        },
-                    },
-                ],
+
+        # Define the parent page for the new page
+        self.parent_page = {
+            "type": "page_id",
+            "page_id": "343f6e7933e043629c38d81ee01d789f",
+        }
+
+        if self.notion_page_id is None:
+            # Create a new page for the client and store the page ID
+            self.notion_page_id = self._create_page()
+            self.client_data["notion_page_id"] = self.notion_page_id
+            self._save_clients_data()
+
+    def _load_clients_data(self):
+        """Load clients data from JSON file."""
+        try:
+            with open("clients.json", "r") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            print("clients.json not found. Creating an empty dictionary.")
+            return {}
+
+    def _save_clients_data(self):
+        """Save updated clients data to JSON file."""
+        self.CLIENTS_DATA[self.client_id] = self.client_data
+        with open("clients.json", "w") as f:
+            json.dump(self.CLIENTS_DATA, f, indent=2)
+        print(f"Updated data for client {self.client_id} saved successfully.")
+
+    def _create_page(self):
+        """
+        Create a new Notion page for the client.
+
+        Uses client data to set the page title, icon, and cover.
+        Creates the page as a child of self.parent_page.
+
+        Returns:
+            str or None: The ID of the new page if successful, None otherwise.
+        """
+
+        # Get the client's page details
+        client_name = self.client_data["client_name"]
+        notion_page_emoji = self.client_data["notion_page_emoji"]
+        notion_page_cover_url = self.client_data["notion_page_cover_url"]
+
+        page_title = f"{client_name}'s Workbook"
+
+        # API endpoint for pages
+        self.base_url = "https://api.notion.com/v1/pages"
+        # Create the request body
+        data = {
+            "parent": self.parent_page,
+            "icon": {"emoji": notion_page_emoji},
+            "cover": {"external": {"url": notion_page_cover_url}},
+            "properties": {
+                "title": [{"text": {"content": page_title}}],
             },
-        },
-        {
-            "object": "block",
-            "type": "bulleted_list_item",
-            "bulleted_list_item": {
-                "rich_text": [
-                    {
-                        "type": "text",
-                        "text": {
-                            "content": "What are the key challenges you're facing, and how do you think this project can help address them?"
-                        },
-                    },
-                ],
-            },
-        },
-        # "content": "How do you envision this project contributing to your overall business strategy?"
-        {
-            "object": "block",
+        }
+
+        # Make the POST request
+        response = requests.post(self.base_url, headers=self.headers, json=data)
+
+        # Check the response
+        if response.status_code == 200:
+            print("Successfully created the page in Notion")
+            # Return the id of the created page
+            return response.json()["id"]
+        else:
+            print(f"Failed to create the page. Status code: {response.status_code}")
+            print(response.text)
+            return None
+
+    def add_content_to_page(self, children):
+        """
+        Add content blocks to the Notion page.
+
+        Args:
+            children (list): List of content blocks to add.
+
+        Prints success or failure message.
+        """
+
+        # Create the request body
+        data = {"children": children}
+
+        url = f"https://api.notion.com/v1/blocks/{self.notion_page_id}/children"
+        # Make a PATCH request to update the block children
+        response = requests.patch(url, headers=self.headers, json=data)
+
+        # Check the response
+        if response.status_code == 200:
+            print("Successfully updated the block children in Notion")
+        else:
+            print(
+                f"Failed to update the block children. Status code: {response.status_code}"
+            )
+            print(response.text)
+
+    def generate_interview_questions_body(self, questions):
+        """
+        Generate a Notion-compatible body for interview questions.
+
+        Args:
+            questions (list): List of interview questions as strings.
+
+        Returns:
+            list: A list containing a single dictionary representing a Notion
+                'heading_2' block with toggleable interview questions as
+                bulleted list items.
+        """
+
+        questions_list = []
+        for question in questions:
+            child = {
+                "object": "block",
+                "type": "bulleted_list_item",
+                "bulleted_list_item": {
+                    "rich_text": [{"type": "text", "text": {"content": question}}]
+                },
+            }
+            questions_list.append(child)
+
+        interview_questions = {
             "type": "heading_2",
             "heading_2": {
-                "rich_text": [{"type": "text", "text": {"content": "Project Details"}}],
-            },
-        },
-        {
-            "object": "block",
-            "type": "paragraph",
-            "paragraph": {
                 "rich_text": [
-                    {
-                        "type": "text",
-                        "text": {
-                            "content": "Details of the project",
-                        },
-                    }
-                ]
+                    {"type": "text", "text": {"content": "Interviewing Question"}}
+                ],
+                "is_toggleable": True,
+                "children": questions_list,
             },
-        },
-    ],
-}
+        }
 
+        children = [interview_questions]
 
-# Make the POST request
-response = requests.post(url, headers=headers, json=data)
+        return children
 
-# Check the response
-if response.status_code == 200:
-    print("Successfully created the page in Notion")
-    pprint(response.json())
-else:
-    print(f"Failed to create the page. Status code: {response.status_code}")
-    print(response.text)
+    def generate_interview_questions_body_2(self, questions):
+
+        questions_list = []
+        for question in questions:
+            child = {
+                "object": "block",
+                "type": "bulleted_list_item",
+                "bulleted_list_item": {
+                    "rich_text": [{"type": "text", "text": {"content": question}}]
+                },
+            }
+            questions_list.append(child)
+
+        interview_questions = {
+            "type": "heading_2",
+            "heading_2": {
+                "rich_text": [
+                    {"type": "text", "text": {"content": "Interviewing Question"}}
+                ],
+                "is_toggleable": True,
+                "children": questions_list,
+            },
+        }
+
+        children = [interview_questions]
+
+        children.append(
+            {
+                "object": "block",
+                "type": "heading_2",
+                "heading_2": {
+                    "rich_text": [
+                        {"type": "text", "text": {"content": "Project Details"}}
+                    ],
+                },
+            }
+        )
+        children.append(
+            {
+                "object": "block",
+                "type": "paragraph",
+                "paragraph": {
+                    "rich_text": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": "Details of the project",
+                            },
+                        }
+                    ]
+                },
+            }
+        )
+        return children

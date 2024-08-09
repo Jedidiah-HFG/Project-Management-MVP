@@ -9,8 +9,8 @@ from langchain.llms import Ollama
 from tools import (
     get_client_transcript,
     get_pmbok_standards,
+    save_interview_questions,
     create_project_workbook,
-    CrewAITools,
 )
 
 
@@ -38,7 +38,7 @@ class PMAgents:
             goal=dedent(
                 """Develop comprehensive, PMBOK-aligned project workbooks that effectively cover all elements of project management, tailored to meet unique client needs"""
             ),
-            #llm=self.LMStudio,
+            # llm=self.LMStudio,
         )
 
     def interviewing_agent(self):
@@ -50,7 +50,7 @@ class PMAgents:
             goal=dedent(
                 """Help clients articulate their vision and needs clearly, ensuring all essential project management aspects are covered during the interview process"""
             ),
-            #llm=self.LMStudio,
+            # llm=self.LMStudio,
         )
 
     def document_analyst(self):
@@ -62,8 +62,8 @@ class PMAgents:
             goal=dedent(
                 """Extract, analyze, and synthesize critical information from various project-related documents, ensuring comprehensive understanding and effective utilization of available data"""
             ),
-            tools=[CrewAITools.get_pmbok_standards, CrewAITools.get_client_transcript],
-            #llm=self.LMStudio,
+            tools=[get_pmbok_standards, get_client_transcript],
+            # llm=self.LMStudio,
         )
 
     def writing_agent(self):
@@ -75,6 +75,6 @@ class PMAgents:
             goal=dedent(
                 """Create comprehensive, PMBOK-aligned project workbooks that ensure clarity and accountability throughout the project lifecycle."""
             ),
-            tools=[create_project_workbook],
-            #llm=self.LMStudio,
+            tools=[save_interview_questions, create_project_workbook],
+            # llm=self.LMStudio,
         )
