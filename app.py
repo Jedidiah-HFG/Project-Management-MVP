@@ -6,7 +6,7 @@ from notion import NotionAPI
 # Load environment variables
 load_dotenv()
 
-st.set_page_config(page_title="MVP Project", layout="wide")
+st.set_page_config(page_title="Project Management MVP", layout="wide")
 st.markdown(
     "<h1 style='text-align: center;'>MVP Project</h1>",
     unsafe_allow_html=True,
