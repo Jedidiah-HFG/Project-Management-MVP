@@ -1,5 +1,4 @@
 import json
-import time
 from dotenv import load_dotenv
 import streamlit as st
 from notion import NotionAPI
