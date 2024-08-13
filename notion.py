@@ -5,6 +5,32 @@ import requests
 
 class NotionAPI:
 
+    colors = [
+        "blue",
+        "brown",
+        "default",
+        "gray",
+        "green",
+        "orange",
+        "yellow",
+        "green",
+        "pink",
+        "purple",
+        "red",
+    ]
+
+    bg_colors = [
+        "blue_background",
+        "brown_background",
+        "gray_background",
+        "green_background",
+        "orange_background",
+        "pink_background",
+        "purple_background",
+        "red_background",
+        "yellow_background",
+    ]
+
     def __init__(self, client_id: str):
 
         # Retrieve the Notion API key from environment variable
@@ -15,7 +41,10 @@ class NotionAPI:
 
         # Store the client ID
         self.client_id = client_id
-        self.client_data = self.CLIENTS_DATA[client_id]
+        # Retrieve the client data
+        self.client_data = self.CLIENTS_DATA.get(
+            client_id, self.CLIENTS_DATA["new_client"]
+        )
 
         self.notion_page_id = self.client_data["notion_page_id"]
 
@@ -123,9 +152,9 @@ class NotionAPI:
             )
             print(response.text)
 
-    def _generate_bulleted_list_items(self, contents):
+    def _generate_bulleted_list_items(self, list_contents):
         contents_list = []
-        for content in contents:
+        for content in list_contents:
             child = {
                 "object": "block",
                 "type": "bulleted_list_item",
@@ -165,46 +194,38 @@ class NotionAPI:
 
         return children
 
-    def generate_project_workbook_body(self):
+    def generate_project_workbook_body(self, contents):
 
         children = []
 
         children.append(
             {
-                "object": "block",
-                "type": "heading_2",
-                "heading_2": {
+                "type": "heading_1",
+                "heading_1": {
                     "rich_text": [
                         {"type": "text", "text": {"content": "Project Charter"}}
                     ],
+                    "color": "red_background",
                 },
             }
         )
-        children.append(
-            {
-                "object": "block",
-                "type": "heading_3",
+
+        def get_title_element(text_content):
+            return {
+                "type": "heading_2",
                 "heading_2": {
-                    "rich_text": [
-                        {"type": "text", "text": {"content": "Project Description"}}
-                    ],
+                    "rich_text": [{"type": "text", "text": {"content": text_content}}],
+                    "color": "blue_background",
                 },
             }
-        )
-        children.append(
-            {
-                "object": "block",
-                "type": "paragraph",
-                "paragraph": {
-                    "rich_text": [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": "Details of the project",
-                            },
-                        }
-                    ]
-                },
-            }
-        )
+
+        for key, value in contents.items():
+
+            title = key.replace("_", " ").title()
+
+            # Add the title element
+            children.append(get_title_element(title))
+            # Add the bulleted list items
+            children.extend(self._generate_bulleted_list_items(value))
+
         return children
