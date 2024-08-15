@@ -1,7 +1,8 @@
-import json
+import io
 from dotenv import load_dotenv
 import streamlit as st
-from notion import NotionAPI
+from crew_workflow import PMCrew
+
 
 # Load environment variables
 load_dotenv()
@@ -12,48 +13,136 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Load data
-with open("sample_data.json", "r") as f:
-    sample_data = json.load(f)
-with open("clients.json", "r") as f:
-    all_clients_data = json.load(f)
 
-# Allow users select a client
-client_id = st.selectbox("Select a client", all_clients_data.keys())
-# Get the data for the specified client
-client_data = all_clients_data[client_id]
-# Create a notion api
-notion_api = NotionAPI(client_id=client_id)
+def get_onboarding_form_response():
+    """
+    Read the contents of an uploaded text file.
 
-# Initialize empty states
-if "interview_question" not in st.session_state:
-    st.session_state["interview_question"] = []
+    Returns:
+    str or None: The contents of the file as a string if successful, None otherwise
+    """
+    # Add a subheader
+    st.subheader("Onboarding Form Response")
 
-if st.button("Create Interview Questions"):
+    # File uploader
+    uploaded_file = st.file_uploader("Upload the onboarding form response", type="txt")
 
-    with st.spinner("Creating interviewing questions"):
-        # Read interviewing questions
-        interview_questions = sample_data["interview_question"]
+    if uploaded_file is not None:
+        try:
+            # Check if the file is a text file
+            if uploaded_file.type == "text/plain":
+                # Read the contents of the file
+                stringio = io.StringIO(uploaded_file.getvalue().decode("utf-8"))
+                file_contents = stringio.read()
+                return file_contents
+            else:
+                st.error("Please upload a text file.")
+                return None
+        except Exception as e:
+            st.error(f"An error occurred while reading the file: {str(e)}")
+            return None
+    return None
 
-    # Save the interview questions to session state
-    st.session_state["interview_question"] = interview_questions
 
-    with st.spinner("Saving interviewing questions"):
-        # Generate interview questions body
-        interview_questions_body = notion_api.generate_interview_questions_body(
-            questions=sample_data["interview_question"]
+def get_interview_call_transcript():
+    """
+    Read the contents of an uploaded text file.
+
+    Returns:
+    str or None: The contents of the file as a string if successful, None otherwise
+    """
+    # Add a subheader
+    st.subheader("Interview Call Transcript")
+
+    # File uploader
+    uploaded_file = st.file_uploader(
+        "Upload the transcript of the interview call", type="txt"
+    )
+
+    if uploaded_file is not None:
+        try:
+            # Check if the file is a text file
+            if uploaded_file.type == "text/plain":
+                # Read the contents of the file
+                stringio = io.StringIO(uploaded_file.getvalue().decode("utf-8"))
+                file_contents = stringio.read()
+                return file_contents
+            else:
+                st.error("Please upload a text file.")
+                return None
+        except Exception as e:
+            st.error(f"An error occurred while reading the file: {str(e)}")
+            return None
+    return None
+
+
+def main():
+
+    # Allow users select a client
+    client_id = "new_client"
+
+    # Create an instance of PMCrew
+    pm_crew = PMCrew(client_id=client_id)
+
+    onboarding_tab, interview_tab, follow_up_tab = st.tabs(
+        ["Onboarding", "Interview", "Follow-up"]
+    )
+
+    with onboarding_tab:
+        # Get the onboarding form response
+        onboarding_form_response = get_onboarding_form_response()
+
+        if onboarding_form_response is None:
+            st.stop()
+
+        # Display file contents
+        st.text_area(
+            "Response",
+            onboarding_form_response,
+            height=400,
+            label_visibility="hidden",
         )
-        # Add interview_questions_body to notion
-        notion_api.add_content_to_page(children=interview_questions_body)
 
-    st.success("Interviewing questions saved to Notion")
+        if st.button("Create Interviewing Questions"):
+
+            with st.spinner("Creating interviewing questions"):
+                # Create and add interviewing questions
+                result = pm_crew.create_interviewing_questions(onboarding_form_response)
+
+            st.success(result)
+
+    with interview_tab:
+        # Get the initial interview call transcript
+        interview_call_transcript = get_interview_call_transcript()
+
+        if interview_call_transcript is None:
+            st.stop()
+
+        # Display file contents
+        st.text_area(
+            "Transcript",
+            interview_call_transcript,
+            height=400,
+            label_visibility="hidden",
+        )
+
+        if st.button("Populate Workbook"):
+
+            with st.spinner("Updating project workbook"):
+                # Populate project workbook
+                result = pm_crew.update_project_workbook(interview_call_transcript)
+
+            st.success(result)
 
 
-if "interview_question" in st.session_state:
+if __name__ == "__main__":
+    main()
 
-    with st.expander("Interviewing Questions"):
-        # Display the interview questions
-        st.write("- " + "\n\n- ".join(st.session_state["interview_question"]))
+
+quit()
+
+
+if True:
 
     # Allow user to upload their call transcript
     st.file_uploader("Upload your call transcript with the client")

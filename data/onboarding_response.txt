@@ -1,0 +1,31 @@
+﻿1. Name and Job Title:
+Sarah Johnson, Marketing Director
+
+2. Organization Name:
+TechNova Solutions
+
+3. Project Description:
+Launch a new mobile app for customer loyalty program
+
+4. Estimated Timeline:
+6 months (January 2025 - June 2025)
+
+5. Approximate Budget Range:
+$150,000 - $200,000
+
+6. Top 2 Project Goals:
+a) Increase customer retention by 20%
+b) Boost average purchase frequency by 15%
+
+7. Primary Point of Contact:
+Sarah Johnson (sarah.johnson@technova.com, 555-123-4567)
+
+8. Immediate Challenges or Concerns:
+- Tight deadline due to planned summer promotional campaign
+- Integration with existing CRM system
+
+9. Previous Project Management Software:
+Trello, but open to new solutions
+
+10. Additional Information:
+We have a small, agile team and prefer regular check-ins. Our IT department has limited availability, so we may need extra support for technical integrations.

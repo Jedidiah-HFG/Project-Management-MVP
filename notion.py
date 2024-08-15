@@ -3,7 +3,7 @@ import json
 import requests
 
 
-class NotionAPI:
+class Notion:
 
     colors = [
         "blue",
@@ -36,18 +36,6 @@ class NotionAPI:
         # Retrieve the Notion API key from environment variable
         NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
 
-        # Load the clients data
-        self.CLIENTS_DATA = self._load_clients_data()
-
-        # Store the client ID
-        self.client_id = client_id
-        # Retrieve the client data
-        self.client_data = self.CLIENTS_DATA.get(
-            client_id, self.CLIENTS_DATA["new_client"]
-        )
-
-        self.notion_page_id = self.client_data["notion_page_id"]
-
         # Create the headers for the API requests
         self.headers = {
             "Authorization": f"Bearer {NOTION_API_KEY}",
@@ -60,6 +48,18 @@ class NotionAPI:
             "type": "page_id",
             "page_id": "343f6e7933e043629c38d81ee01d789f",
         }
+
+        # Load the clients data
+        self.CLIENTS_DATA = self._load_clients_data()
+
+        # Store the client ID
+        self.client_id = client_id
+        # Retrieve the client data
+        self.client_data = self.CLIENTS_DATA.get(
+            client_id, self.CLIENTS_DATA["new_client"]
+        )
+
+        self.notion_page_id = self.client_data["notion_page_id"]
 
         if self.notion_page_id is None:
             # Create a new page for the client and store the page ID
@@ -81,7 +81,7 @@ class NotionAPI:
         self.CLIENTS_DATA[self.client_id] = self.client_data
         with open("clients.json", "w") as f:
             json.dump(self.CLIENTS_DATA, f, indent=2)
-        print(f"Updated data for client {self.client_id} saved successfully.")
+        print(f"Successfully updated json data for {self.client_id}")
 
     def _create_page(self):
         """
@@ -118,7 +118,7 @@ class NotionAPI:
 
         # Check the response
         if response.status_code == 200:
-            print("Successfully created the page in Notion")
+            print("Successfully created a new page in Notion")
             # Return the id of the created page
             return response.json()["id"]
         else:
@@ -145,7 +145,30 @@ class NotionAPI:
 
         # Check the response
         if response.status_code == 200:
-            print("Successfully updated the block children in Notion")
+            print("Successfully updated page in Notion")
+      
+        elif response.status_code == 400:
+            error_data = response.json()
+            if error_data.get(
+                "code"
+            ) == "validation_error" and "archived" in error_data.get("message", ""):
+                print(
+                    "Block is archived or doesn't exist. Attempting to create a new block."
+                )
+
+                # Create a new page for the client and store the page ID
+                self.notion_page_id = self._create_page()
+                self.client_data["notion_page_id"] = self.notion_page_id
+                self._save_clients_data()
+
+                # Retry adding content to the new page
+                self.add_content_to_page(children)
+
+            else:
+                print(
+                    f"Failed to update the block children. Status code: {response.status_code}"
+                )
+                print(response.text)
         else:
             print(
                 f"Failed to update the block children. Status code: {response.status_code}"
@@ -166,33 +189,44 @@ class NotionAPI:
 
         return contents_list
 
-    def generate_interview_questions_body(self, questions):
+    def create_toggleable_notion_block(self, title, content):
         """
-        Generate a Notion-compatible body for interview questions.
+        Create a toggleable Notion block with a title and content, either as plain text or a bulleted list.
 
         Args:
-            questions (list): List of interview questions as strings.
+            title (str): The title for the toggleable block.
+            content (str or list): The content to be added. If is_list is True, this should be a list of strings.
 
         Returns:
             list: A list containing a single dictionary representing a Notion
-                'heading_2' block with toggleable interview questions as
+                'heading_2' block with toggleable content, either as plain text or
                 bulleted list items.
         """
 
-        interview_questions = {
+        content_block = {
             "type": "heading_2",
             "heading_2": {
-                "rich_text": [
-                    {"type": "text", "text": {"content": "Interviewing Question"}}
-                ],
+                "rich_text": [{"type": "text", "text": {"content": title}}],
                 "is_toggleable": True,
-                "children": self._generate_bulleted_list_items(questions),
+                "children": [],
             },
         }
 
-        children = [interview_questions]
+        if isinstance(content, list):
+            content_block["heading_2"]["children"] = self._generate_bulleted_list_items(
+                content
+            )
+        else:
+            content_block["heading_2"]["children"] = [
+                {
+                    "type": "paragraph",
+                    "paragraph": {
+                        "rich_text": [{"type": "text", "text": {"content": content}}]
+                    },
+                }
+            ]
 
-        return children
+        return [content_block]
 
     def generate_project_workbook_body(self, contents):
 

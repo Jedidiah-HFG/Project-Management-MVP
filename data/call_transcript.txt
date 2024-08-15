@@ -1,0 +1,131 @@
+﻿Client Script for POC (2024-06-26 10:34 GMT-3) - Transcript
+Attendees
+Dan Roberts, Fireflies.ai Notetaker Juarez, Juarez Weiss, Vira Kolupaieva
+Transcript
+This editable transcript was computer generated and might contain errors. People can also change the text after it was created.
+Juarez Weiss: All Here you go. Then you're ready. Then you are Roberto.
+Dan Roberts: Yes.
+Juarez Weiss: All right. Good morning, Dr. Roberts. Thank you for taking the time to speak with me today as an experience professional in surgical service management your insights into Supply Chain management, and it's important Finance quality and safety and certain recruitment are invaluable.
+Juarez Weiss: Could you provide an overview of the hospital including the range of services offers and any unique aspect that distinguish it from other academic medical centers?
+Dan Roberts: Yes, Good morning everyone. Please. Call me I'm Dr. Dan Roberts. I'm the Chief Operating Officer for UCLA Medical Center. I cover the entire Healthcare System. The majority of the project that we're going to discuss today is located at UCLA Ronald Reagan hospital. It's the largest hospital within the system and we have been working for about a year to a year and…
+Juarez Weiss: right
+Dan Roberts: a half now on I'm Supply Chain management in the operating room suite our Hospital size is a thousand beds our ICU comprises about 20% of our total bed size. And 80% of that 20% of our bedside is dedicated to solid organ transplantation. We are world-renowned for our liver transplant service people all over the world come to UCLA Ronald Reagan in order to receive liver transplant because quite honestly, we're the best in the industry our quality and safety scores out rank. Everyone else bottom line for the hospital Healthcare System for UCLA health system.
+Dan Roberts: It is a huge profit generator for us. I hate to use the word profit in healthcare, but it is where our margins for other services that are less paying exist. Anything else you'd like to know about UCL Ronald Reagan.
+Juarez Weiss: yeah, what is the hospital's Mission and how does it align with its operational strategies?
+Dan Roberts: Sure, the mission of the hospital is to educate the next finest Healthcare Providers. We do that through multidisciplinary services at the schools that we have at UCLA that includes medicine Dentistry nursing Physical occupational therapy. So the mission is to teach the next generation of experts if you will. What was your other question?
+Juarez Weiss: All It's for the hospital right now. I think these are all answers just to let We have a couple of questions here that we're going to go over a lot of the aspects of the hospital and the services offers and a couple of other questions to gauge the size of this project and also to have risk management. So this is going to be a heavy information on meeting. So can you talk to me a bit about the surgical Services?
+Dan Roberts: exactly
+Juarez Weiss: Can you describe the surgical services offered actual medical center?
+Dan Roberts: Yes, so we have 32 operating room suites that are within the hospital system. We have eight external surgical centers within the UCLA Healthcare System. Our project today is specifically focused on those 32 operating rooms within the hospital itself. So we're not going to talk about the outpatient facilities surgical Services include.
+Juarez Weiss: All right.
+Dan Roberts: neurosurgery vascular orthopedic surgery Ophthalmology OBGYN, but that's kind of separate because it's in our birthing center. It's not necessarily within the 32. And solid organ transplantation. Those are our primary seven categories of services that we provide in the surgical Department.
+Juarez Weiss: All And from those what would be the most common types performs there and how do they impact the overall Hospital operations?
+Dan Roberts: Good question predominantly, it's solid It's Orthopedics. and vascular we don't do as much cardiac in your surgery for us is typically trauma. It impacts our bottom line that we support those three services and we're always recruiting for those three top Services recruitment means new procedural techniques new surgeons new assisted devices in surgery. So in Orthopedics as an example, we use a lot of robotics. We're beginning to use robotics in our solid organ transplant program as well.
+00:05:00
+Juarez Weiss: Okay, could you share the annual case the volume for each surgical service?
+Dan Roberts: Yes, I'll do the top three. We do four solid organ transplants per day five days a week.
+Juarez Weiss: Okay.
+Dan Roberts: So we do 20 solid organ transplants per week. So per month, that's 80 you do the math for our annual Orthopedic is typically a replacement joint disease. So that's hip knee shoulder elbow wrist. That volume is about 600 to 800 cases per year. And for a vascular, we're doing about 1200 per year and that's typically large vessel replacement like award aortic. stinting So recreating vasculature…
+Juarez Weiss: Okay,…
+Dan Roberts: if you will.
+Juarez Weiss: in the cases where this volume fluctuates, how do you manage that and what strategies are in place to ensure efficiency and Quality Care?
+Dan Roberts: So fluctuations in solid organ where the predominance of our focus is. We see very little fluctuation. We are Rock Solid we will do 20 solid organ transplantations per week. And that's a significant number by the way. For the other things like Orthopedics, we have some seasonality with our patients. Some will go north up into Washington State but most are staying right here. in the Los Angeles area
+Dan Roberts: It does affect our bottom line when we start seeing fewer of those Orthopedic cases, but a room is a room for us. We don't have Orthoped solid organ rooms so we can add more solid organs. We can add more vascular surgery if we need to and we typically do that the other risk point with our volume is everybody wants a vacation. So a lot of times you'll see us drop in our organ transplantation case volume when our organ transplant surgeons go to conference or vacation, so we try to and anticipate that early in the year so that we can plan around that volume.
+Juarez Weiss: Keep talking about volume, but going to the surgical instruments. What is the volume of the surgical instruments that you process daily? And how do you manage that?
+Dan Roberts: For our solid organ program. we call them carts There are 16 Parts. There are four carts in each room. so we can do four rooms simultaneously never do we typically will run three rooms per day with one set of four carts in reserve we do that in reserve in case we have a comeback at patient that has to come back to surgery but whatever complication And there's surgical instruments are processed if we do the math at least.
+Dan Roberts: Four to five times per day wear and tear on those instruments typically has a replacement rate of those surgical instruments about every 90 to 120 days and because of those replacement rates depending on the type of instruments, you can run into high expense. For example, there are some retractors that we use that are Auto retractors meaning that they can adjust based on patient muscle resistance. Those are very expensive. They're 65 to 75,000 a piece. And those will wear out in about 120 to 240 days.
+Juarez Weiss: You already kind of at addressing this but are there any particular challenges associated with instrument processing and how do you address them?
+Dan Roberts: And I would say that's up like a person problem. You have to have very specialized and trained Technicians who do the processing and cleaning of those instruments. They're at least three different ways. Our instruments for our solid cases have to be processed. Some are come back gas summer done by Steam Heat others have done by radiation tubes are done by radiation, which means we have to have a full complement and train staff and I don't know if you know about the Los Angeles areas, very expensive to live here. So we run into Personnel issues when we don't have enough people to actually process the instruments. So we've trained some of our staff to be able to if we have low volume cases that day who can go down and process surgical instruments. So we feel like we mitigated that risk through cross training of our person to help.
+00:10:00
+Juarez Weiss: Okay, we started searching on Personnel already. So how many time employees full time equivalents are dedicated to the surgical Services Department.
+Dan Roberts: There are currently all together all in for the entire surgical Department that includes Instrument cleaning and packaging. It's Central Sterile as we call it supply Our Personnel in the operating room and administrative staff. We're all in 320 ftes.
+Juarez Weiss: Okay, could you provide us with a brief overview of the Staffing structure in roles within the surgical Services team?
+Dan Roberts: Yes, so I have a vice president of surgical services that reports directly to me that vice president has two associate vice presidents one is responsible for clinical and for clinical that someone who's directly responsible for patient. If there's a human being in the room, that's what that vice president responsible for. The other one is responsible for operations. So they're doing all of the supply chain the pharmacy function. So that's what they are doing. Each of those has it supply chain support
+Dan Roberts: And underneath them, so there would be a director that would report up to the ABP for operations. Then on the other side. There is a RN a nurse director for each of our cervical services within the department so orthopedic vascular solid organ it are in director who's responsible for the clinical side sitting outside of this is a government structure for And the surgeons so the surgeons do not report to the CEO. They're not in hospital employees. We go through there Board of professions, which is their organized entity that they do all of their work with if you will that's where they're operations are done, but there is a surgeon that's directly linked to every RN director.
+Dan Roberts: And then underneath each of those are obviously the surgical text the circulating RNs all of anesthesia by the way reports into that border professions group.
+Juarez Weiss: Okay.
+Dan Roberts: So anesthesia is not within the surgical service department and that does include our Pas and certified registered nurse analysis. They're not a part of my umbrella of the organization.
+Juarez Weiss: Okay, I think you covered most of this but could you walk me through the organizational charge of the surgical Services Department?
+Dan Roberts: Yes, so I said as directly reporting to me R2 associate vice presidents described those Reporting to associate vice president of clinical are six RN clinical directors.
+Juarez Weiss: Yeah.
+Dan Roberts: They have a dotted line to a surgical service lead. And under each of those there is a allotment of fte's based on surgical volume size. So in that allotment of ftes are surgical tech circulating RN's and support staff like housekeeping quality data analysts and reporters on the other side of operations has a pharmacist. IT director and supply chain director and each of those has an allotment of fte's that are doing the same supporting them
+Juarez Weiss: All Thank you in your opinion. How does this structure either supports or hinders efficient operations?
+Dan Roberts: It is supportive. I think it hinders because it's too top down. We don't hear about problems in the operating room until they're bigger than they should be. So there's no bottom up approach to recording where inefficiencies exist. It's a very pole system. I have to pull the directors into a meeting and then pull this information out of them. is that they're afraid to tell me that there was a near miss or they didn't have this equipment that day so they kind of manage that to themselves and they don't see that each one of those little problems can become a bigger problem which is why we reached out to HMG and you all because we are having a specific problem with supplies and the lack of cataloging and billing for those supplies and
+00:15:00
+Dan Roberts: that came up six months after we're looking at Financial reports and discovering that we have a huge loss of disposables that have not been accounted for
+Dan Roberts: So in our Central Sterile Processing area where let me just walk on new instrum for you a new instrument will come into supply chain for surgical Services. There's a budget for that. Dr. X may say I need a scalpel hook and it looks like a j and it goes down into a tube and it cuts the vessel of an organ. So that's in outer budget. Whatever the need is we make sure that they have the instrument that then goes to be ordered and after it's ordered that goes to Central Sterile Processing. They make sure that it's It's the right instrument.
+Dan Roberts: ID match to budget match to the billing component did we get the right instrument then they figure out from the manufacturer how it gets processed the first time it goes through and we assure that it can handle. and the processing of that instrument is then placed on one of those four carts that goes into a solid organ room. supporting that here's the answer to your question the technologies that support that we know from cataloging and ordering that we have what's called A id a uid is a unique identification number or tag Associated to that specific instrument. That's a nationally known.
+Dan Roberts: Identification number if it's BR549. Everyone knows what you're talking about regardless of UCLA or otherwise everyone knows what that instrument is based on that, id. Once that is ordered and placed within our system. When I walked you through the workflow where it's scanned for the first time in our Central Sterile Processing, we know that that's called an active instrument meaning it's actually going to be used or could be used in one of our four carts. We need to know that because if there's ever a product recall a national recall of that item, we know that we haven't number one and we know the first time we used it and subsequent use so war is the answer to your question is we have
+Dan Roberts: Cataloging that's very manual. We know what we're going to order. We match through human touch that description of that instrument to the product ID number from the company that we're going to order from We have a supportive technology in Central Sterile. That scans that uid. We know then that we have that house and we're getting ready to put it in production. And once it goes on to the four cart system, we lose it. I could not tell you right now if I have any of those J Hooks in a cart. That's in a patient's room whether or not it has been used or hasn't been used and whether or not it's come back.
+Dan Roberts: From a specific operating room to Central Sterile Supply will We call them offload all of those dirty instruments and when they do
+Dan Roberts: That instrument is matched to its description and I know that sounds weird but we know that it starts like this. It is an endoscopic instrument. It is a cutting instrument. It is attached to an electrode it hooks up to electricity. It generates heat.
+Juarez Weiss: Okay, once again,…
+Dan Roberts: It is used for vascular cutting that description Narrows down and…
+00:20:00
+Juarez Weiss: I think you touched some of those but how do you see these Technologies contributing to improving efficiency and…
+Dan Roberts: our system, which is a human touch…
+Juarez Weiss: the status of patients?
+Dan Roberts: what that instrument probably is then we rely on a human to say this is a hook and it belongs on this train and that tray goes into number two of the four heart system. That's the Technology support in the workflow and where the problem is in our process.
+Dan Roberts: I think we have a good. before and after technology system, I would like for us to have better visual recognition of the J hook the thing.
+Dan Roberts: And let me just make one point of clarification. hooks can only be used three times and then they have to be disposed so technically instrument non-disposable, but they must be disposed so they fall into a different go Your other instruments that we put on the cart that don't come from Central Sterile as part of the cleaning process, but we put them on and those are disposable. What we are missing. And what needs to be improved? Is where we have humans manually doing something now on the ordering side. We need a human to do that. But as this instrument is moving through our workflow. I would rather we not have human input human verification that you actually have the instrument in the room because humans will know if they have the right instrument. It is a joint commission requirement.
+Dan Roberts: That a person identifies all the instruments in the room and Those instruments so there's an opening count.
+Juarez Weiss: In the thought of processes and…
+Dan Roberts: There's a mid count and there is a closing count and there is an end count. There are four specific counts that are done by human being.
+Juarez Weiss: strategy and products. How are new strategies and…
+Dan Roberts: I think we have an opportunity for visualization.
+Juarez Weiss: processes or…
+Juarez Weiss: products introduced to the surgical teams?
+Dan Roberts: And to recognize these instruments and…
+Dan Roberts: catalog them as being in the room, but not used in the room and are missing from the room and needed missing from the room and not needed. I think those would be the categories where we would look more support.
+Dan Roberts: Very good question. Typically, we identify an opportunity either in quality and safety. in revenue cycle or in new technologies and Technologies doesn't necessarily mean computers. It could be What I described as a retracting device a way of keeping the body cavity open while they do the surgery. So any new techniques so skills and training so skills and training update any of those four things can prompt us to do what we call a process Improvement project hip. And when we identify those things we typically identify a sponsor which is typically the r in Clinical Director and their surgical partner.
+Dan Roberts: And for what we've reached out to hfg for it was a revenue cycle issue. We were losing so much money in our supply chain disposables that we needed a team dedicated to work on this. So we assembled the team got together and…
+Juarez Weiss: I think you cannot answer this.
+Dan Roberts: the team and started working on the project and…
+Juarez Weiss: But do you have a process in place or…
+Dan Roberts: they included a project manager from our project management division at UCLA health system.
+Juarez Weiss: what is the typical process to evaluate and Implement new technologies or procedures?
+Dan Roberts: And all the things that project managers do they did risk management. I'm the sponsor. They brought the team together and started working on the project.
+Dan Roberts: yes, so if the team comes up with What they believe is a solution technical or otherwise, they write a business case and the business case describes what it is. They are going to do within the scope of the project. and as solution testing so it has to match to our overall UCLA strategy. I'm operational methods has to conform to all of that. You just can't go Rogue and decide to bring something into an operating room. Once they had their business case it also includes. How much is this thing going to cost who's responsible for and how will they know success? What are they going to measure?
+00:25:00
+Dan Roberts: All of that's in the business case and then typically we fund the project for them to go do the project. There's also within that funding support of the project itself. Do you need a new database? Do you need a tech solution? Do you need a project manager? Do you need certain software development? So all of that's typically listed in the business case.
+Dan Roberts: 
+Dan Roberts: I'm gonna be honest with you. it's not managed. I don't think they're communication methods and they're engagement in the project are solid and robust. A lot of the team members come and…
+Juarez Weiss: Okay, so in the case…
+Dan Roberts: And a lot of people will add to the project and…
+Juarez Weiss: where you had resistance. From the staff to this change…
+Dan Roberts: not have any history of the project. So they're not clearly understanding…
+Juarez Weiss: what strategies have been affected?
+Dan Roberts: what it is. They're trying to do. Surgeons are seldom engaged they usually show up and destroy a meeting and tell everybody how stupid they are for what they're trying to do because it's never going to work. So that changes the climate in the room and the team, has worked very hard. So yeah change management. I think we do very poorly.
+Dan Roberts: So we tried to do a technical solution jira where everyone could see their upcoming work where they could understand…
+Juarez Weiss: Okay. Thank you.
+Dan Roberts: what the goal of the project was…
+Juarez Weiss: About Supply Chain management.
+Dan Roberts: what was in planning…
+Juarez Weiss: What are the big challenges you face in the Supply Chain management for surgical services?
+Dan Roberts: what was being worked on what had completed and we thought that people would engage with that and…
+Juarez Weiss: And how do you see these challenges impacting the hospital's Financial Health or…
+Dan Roberts: interact with it more and they actually didn't getting them to log in and…
+Juarez Weiss: patient care?
+Dan Roberts: look at it was a very foreign concept to them. They wanted email updates and reports and email updates the report. We're outdated two days after they were sent and so some people would read their email a week later and start raising absolute hell because the project was going in around Direction and the project would have already developed that part of the work. so we tried using a technology that gave better visibility into the project but it just didn't work. It It wasn't active enough to engage them in the project and keep them focused.
+Dan Roberts: yeah, and I think What we're seeing and loss of Revenue on disposables is the outcome. Of not having appropriate Technologies in place to Monitor and manage instruments specifically the disposables, Yes.
+Juarez Weiss: then Sorry that I missed the last phrase.
+Dan Roberts: and I'm not sure. What those best Solutions are? We don't know what's…
+Juarez Weiss: You said you don't know what sorry.
+Dan Roberts: what's going on in the middle of the process. So once an instrument leaves Central Sterile Processing, I don't know what best in breed is I don't know that best in…
+Dan Roberts: 
+Juarez Weiss: 
+Dan Roberts: it actually goes on a cart into an operating room and it comes back on that cart. We don't know what's happened to it. That's an entire gray area for us. in breed Technologies would fit UCLA's. Culture and workflow that would be interesting to see and…
+Dan Roberts: 
+Juarez Weiss: …
+Dan Roberts: understand but right now we are open to either on-prem development in-house development hybrid development taking something that is out there on the market in tailoring.
+Juarez Weiss: then how does Supply Chain management influence the quality and safety in this services? And do you have any specific initiative in place to ensure that the supply chain? Do not compromise patient safety?
+Dan Roberts: It's Irene's we will not do all the Shelf purchase and implementation. But clearly we need better visibility. after central processing And the return to central processing we don't know. We do and it has everything to do with quality and safety. We are responsible to report to government entities and other reporting agencies are use of instruments to the instrument, uid. We are responsible for doing that and we can't so what we do to cover that risk point is auditing we will do surprise Audits and plan audits of those carts and all of the stages of the workflow of that cart moving around. and in those audits We're finding errors. So we know that we have a system that's in failure. And there's urgency to this project for that to be fixed.
+00:30:00
+Juarez Weiss: Okay, so given that
+Dan Roberts: Did I say anything? we have been at this now for a year and a half with nothing in place so far.
+Juarez Weiss: this kind of leads me to the next question. So given that the surgical department is reported to be quite chaotic. What are the primary sources of that this function?
+Dan Roberts: honestly
+Juarez Weiss: and if you can step into how are these issues being addressed what steps are being taken to improve in performance and cohesion just like to brainstorm this
+Dan Roberts: Sure, I never blame people I blame processes. So our first process that's in Failure is communication surgeons are surgeons first. They're leaders second. They do not have time to read long extensive emails reports. They need very quickly digestible information with a requested action. I think communication is our biggest weakness. We need a method of having Global Communication about a project. What are we trying to improve? What steps have we taken? Where have we shown incremental Improvement? Where do we think we're going next I think communication is key. And I think communication comes through.
+Dan Roberts: Both retrievable information. I need to go look up this thing that we decided three months ago. And with the impact of that was and do I see that impact now, they also need contextual information. Why is this project sitting?
+Meeting ended after 00:50:42 👋
