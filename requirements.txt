@@ -5,6 +5,5 @@ crewai-tools==0.8.3
 langchain==0.2.13
 langchain-community==0.2.12
 pydantic==2.8.2
-pydantic_core==2.20.1
 python-dotenv==1.0.1
 streamlit==1.32.2
