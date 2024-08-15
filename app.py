@@ -103,11 +103,11 @@ def main():
             label_visibility="hidden",
         )
 
-        if st.button("Create Interviewing Questions"):
+        if st.button("Create Interview Questions"):
 
-            with st.spinner("Creating interviewing questions"):
-                # Create and add interviewing questions
-                result = pm_crew.create_interviewing_questions(onboarding_form_response)
+            with st.spinner("Creating interview questions"):
+                # Create and add interview questions
+                result = pm_crew.create_interview_questions(onboarding_form_response)
 
             st.success(result)
 

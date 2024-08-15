@@ -11,7 +11,7 @@ class PMCrew:
         self.agents = PMAgents()
         self.tasks = PMTasks(client_id)
 
-    def create_interviewing_questions(self, onboarding_form_response):
+    def create_interview_questions(self, onboarding_form_response):
 
         # Assign onboarding form response to self
         self.onboarding_form_response = onboarding_form_response
