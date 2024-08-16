@@ -23,7 +23,8 @@ class PMTasks:
 
             The client has already filled an initial onboarding form, and so the questions should be designed to expand on any information already provided by the client.
 
-            **Onboarding Form response**: {onboarding_form_response}
+            **Onboarding Form response**:
+            {onboarding_form_response}
             **Note**: {self.__tip_section()}
         """
             ),

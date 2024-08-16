@@ -81,9 +81,6 @@ def main():
     # Allow users select a client
     client_id = "new_client"
 
-    # Create an instance of PMCrew
-    pm_crew = PMCrew(client_id=client_id)
-
     onboarding_tab, interview_tab, follow_up_tab = st.tabs(
         ["Onboarding", "Interview", "Follow-up"]
     )
@@ -106,6 +103,9 @@ def main():
         if st.button("Create Interview Questions"):
 
             with st.spinner("Creating interview questions"):
+
+                # Create an instance of PMCrew
+                pm_crew = PMCrew(client_id=client_id)
                 # Create and add interview questions
                 result = pm_crew.create_interview_questions(onboarding_form_response)
 
@@ -129,6 +129,9 @@ def main():
         if st.button("Populate Workbook"):
 
             with st.spinner("Updating project workbook"):
+
+                # Create an instance of PMCrew
+                pm_crew = PMCrew(client_id=client_id)
                 # Populate project workbook
                 result = pm_crew.update_project_workbook(interview_call_transcript)
 
