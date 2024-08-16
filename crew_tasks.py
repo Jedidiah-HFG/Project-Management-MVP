@@ -11,6 +11,9 @@ class PMTasks:
         # Create an instance of the PMTools
         self.pm_tools = PMTools(client_id=client_id)
 
+    def __project_workbook_elements(self):
+        return "Project Description, Key Deliverables, High-Level Risks, High-Level Milestones, Budget Summary, Stakeholders."
+
     def __tip_section(self):
         return "If you do your BEST WORK, you'll get a $10,000 bonus!"
 
@@ -18,10 +21,12 @@ class PMTasks:
         return Task(
             description=dedent(
                 f"""
-            **Task**: To create a list of interviewing questions to ask a client during the first meeting
-            **Description**: Create a list of open-ended interviewing questions that HFG (your company) can ask a client before beginning a project to capture all relevant details about a project and have enough information to be able to create a project workbook. The questions should be open-ended and designed to gather as much information as possible about the project to be commenced.
+            **Task**: To create a short list of interviewing questions to ask a client during the first meeting
+            **Description**: Create a list of open-ended interviewing questions that HFG (your company) can ask a client to capture specific details about a project and have enough information to be able to fill a project workbook. You should ask as little questions as possible and the questions don't have to be direct but they should try to capture as much elements of the workbook as possible.
 
-            The client has already filled an initial onboarding form, and so the questions should be designed to expand on any information already provided by the client.
+            The client has already filled an initial onboarding form.
+
+            **Elements of Project Workbook**: {self.__project_workbook_elements()}
 
             **Onboarding Form response**:
             {onboarding_form_response}
