@@ -11,15 +11,14 @@ class PMAgents:
 
     def __init__(self):
 
-        load_dotenv()
-
         # Define models
         self.OpenAI_GPT4o_mini = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.7)
-        self.Ollama = Ollama(model="llama3.1", base_url="http://localhost:11434")
-        self.LMStudio = Ollama(model="llama3.1", base_url="http://localhost:11434")
 
-        os.environ["OPENAI_API_BASE"] = "http://localhost:1234/v1"
-        os.environ["OPENAI_API_KEY"] = "lm-studio"
+        # For local llm
+        # self.Ollama = Ollama(model="llama3.1", base_url="http://localhost:11434")
+        # self.LMStudio = Ollama(model="llama3.1", base_url="http://localhost:11434")
+        # os.environ["OPENAI_API_BASE"] = "http://localhost:1234/v1"
+        # os.environ["OPENAI_API_KEY"] = "lm-studio"
 
     def project_manager(self):
         return Agent(
@@ -45,6 +44,18 @@ class PMAgents:
             llm=self.OpenAI_GPT4o_mini,
         )
 
+    def writing_agent(self):
+        return Agent(
+            role="Documentation Architect",
+            backstory=dedent(
+                """Experienced in comprehensive project documentation. Expertly details scope, schedule, resources, risks, and stakeholder engagement. Delivers clear, concise, and structured workbooks for effective project management"""
+            ),
+            goal=dedent(
+                """Create comprehensive, PMBOK-aligned project workbooks that ensure clarity and accountability throughout the project lifecycle."""
+            ),
+            llm=self.OpenAI_GPT4o_mini,
+        )
+
     def document_analyst(self):
         return Agent(
             role="Document Analysis Specialist",
@@ -55,17 +66,5 @@ class PMAgents:
                 """Extract, analyze, and synthesize critical information from various project-related documents, ensuring comprehensive understanding and effective utilization of available data"""
             ),
             # tools=[get_pmbok_standards, get_client_transcript],
-            llm=self.OpenAI_GPT4o_mini,
-        )
-
-    def writing_agent(self):
-        return Agent(
-            role="Documentation Architect",
-            backstory=dedent(
-                """Experienced in comprehensive project documentation. Expertly details scope, schedule, resources, risks, and stakeholder engagement. Delivers clear, concise, and structured workbooks for effective project management"""
-            ),
-            goal=dedent(
-                """Create comprehensive, PMBOK-aligned project workbooks that ensure clarity and accountability throughout the project lifecycle."""
-            ),
             llm=self.OpenAI_GPT4o_mini,
         )

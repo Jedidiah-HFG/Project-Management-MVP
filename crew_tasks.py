@@ -22,9 +22,17 @@ class PMTasks:
             description=dedent(
                 f"""
             **Task**: To create a short list of interviewing questions to ask a client during the first meeting
-            **Description**: Create a list of open-ended interviewing questions that HFG (your company) can ask a client to capture specific details about a project and have enough information to be able to fill a project workbook. You should ask as little questions as possible and the questions don't have to be direct but they should try to capture as much elements of the workbook as possible.
+            **Description**: Create a concise set of 5-7 open-ended questions for HFG to ask clients during initial meetings. These carefully crafted questions should efficiently gather key project details to populate a project workbook, building on information already provided in the onboarding form.
 
-            The client has already filled an initial onboarding form.
+            Key objectives:
+            1. Limit the list to 5-7 impactful questions
+            2. Capture essential project elements not covered in the onboarding form
+            3. Allow for detailed, informative responses
+            4. Enable HFG to comprehensively fill out the project workbook
+            5. Avoid repetition of information from the onboarding form
+
+            The goal is to maximize information gathering with minimal questioning, ensuring a focused and productive initial client meeting.
+            
 
             **Elements of Project Workbook**: {self.__project_workbook_elements()}
 
