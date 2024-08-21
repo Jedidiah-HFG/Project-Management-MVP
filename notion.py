@@ -254,7 +254,7 @@ class Notion:
                 "type": "heading_2",
                 "heading_2": {
                     "rich_text": [{"type": "text", "text": {"content": text_content}}],
-                    "color": "blue_background",
+                    "color": "purple_background",
                 },
             }
 
