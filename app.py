@@ -34,34 +34,48 @@ def get_onboarding_form_response():
     return None
 
 
-def get_interview_call_transcript():
+def get_interview_calls_transcript():
     """
-    Read the contents of an uploaded text file.
+    Read the contents of multiple uploaded text files and combine them with headings.
 
     Returns:
-    str or None: The contents of the file as a string if successful, None otherwise
+    str or None: A single string containing all file contents with headings if successful, None otherwise
     """
     # Add a subheader
-    st.subheader("Interview Call Transcript")
+    st.subheader("Interview Call Transcripts")
 
-    # File uploader
-    uploaded_file = st.file_uploader(
-        "Upload the transcript of the interview call", type="txt"
+    # File uploader for multiple files
+    uploaded_files = st.file_uploader(
+        "Upload the transcripts of the interview calls",
+        type="txt",
+        accept_multiple_files=True,
     )
 
-    if uploaded_file is not None:
-        try:
-            # Check if the file is a text file
-            if uploaded_file.type == "text/plain":
-                # Read the contents of the file
-                stringio = io.StringIO(uploaded_file.getvalue().decode("utf-8"))
-                file_contents = stringio.read()
-                return file_contents
-            else:
-                st.error("Please upload a text file.")
-                return None
-        except Exception as e:
-            st.error(f"An error occurred while reading the file: {str(e)}")
+    if uploaded_files:
+        combined_contents = []
+        for i, uploaded_file in enumerate(uploaded_files, 1):
+            try:
+                # Check if the file is a text file
+                if uploaded_file.type == "text/plain":
+                    # Read the contents of the file
+                    stringio = io.StringIO(uploaded_file.getvalue().decode("utf-8"))
+                    content = stringio.read()
+
+                    # Add heading and content to the list
+                    heading = f"******** MEETING TRANSCRIPT {i} ********\n"
+                    combined_contents.append(heading + content + "\n\n")
+                else:
+                    st.error(
+                        f"Please upload a text file. '{uploaded_file.name}' is not a text file."
+                    )
+            except Exception as e:
+                st.error(
+                    f"An error occurred while reading the file '{uploaded_file.name}': {str(e)}"
+                )
+
+        if combined_contents:
+            return "".join(combined_contents)
+        else:
             return None
     return None
 
@@ -80,61 +94,59 @@ def main():
     # Allow users select a client
     client_id = "new_client"
 
-    onboarding_tab, interview_tab, follow_up_tab = st.tabs(
-        ["Onboarding", "Interview", "Follow-up"]
-    )
+    onboarding_tab, interview_tab = st.tabs(["Onboarding", "Interview"])
 
     with onboarding_tab:
         # Get the onboarding form response
         onboarding_form_response = get_onboarding_form_response()
 
-        if onboarding_form_response is None:
-            st.stop()
+        if onboarding_form_response:
 
-        # Display file contents
-        st.text_area(
-            "Response",
-            onboarding_form_response,
-            height=400,
-            label_visibility="hidden",
-        )
+            # Display file contents
+            st.text_area(
+                "Response",
+                onboarding_form_response,
+                height=400,
+                label_visibility="hidden",
+            )
 
-        if st.button("Create Interview Questions"):
+            if st.button("Create Interview Questions"):
 
-            with st.spinner("Creating interview questions"):
+                with st.spinner("Creating interview questions"):
 
-                # Create an instance of PMCrew
-                pm_crew = PMCrew(client_id=client_id)
-                # Create and add interview questions
-                result = pm_crew.create_interview_questions(onboarding_form_response)
+                    # Create an instance of PMCrew
+                    pm_crew = PMCrew(client_id=client_id)
+                    # Create and add interview questions
+                    result = pm_crew.create_interview_questions(
+                        onboarding_form_response
+                    )
 
-            st.success(result)
+                st.success(result)
 
     with interview_tab:
         # Get the initial interview call transcript
-        interview_call_transcript = get_interview_call_transcript()
+        interview_calls_transcript = get_interview_calls_transcript()
 
-        if interview_call_transcript is None:
-            st.stop()
+        if interview_calls_transcript:
 
-        # Display file contents
-        st.text_area(
-            "Transcript",
-            interview_call_transcript,
-            height=400,
-            label_visibility="hidden",
-        )
+            # Display file contents
+            st.text_area(
+                "Transcript",
+                interview_calls_transcript,
+                height=400,
+                label_visibility="hidden",
+            )
 
-        if st.button("Populate Workbook"):
+            if st.button("Populate Workbook"):
 
-            with st.spinner("Updating project workbook"):
+                with st.spinner("Updating project workbook"):
 
-                # Create an instance of PMCrew
-                pm_crew = PMCrew(client_id=client_id)
-                # Populate project workbook
-                result = pm_crew.update_project_workbook(interview_call_transcript)
+                    # Create an instance of PMCrew
+                    pm_crew = PMCrew(client_id=client_id)
+                    # Populate project workbook
+                    result = pm_crew.update_project_workbook(interview_calls_transcript)
 
-            st.success(result)
+                st.success(result)
 
 
 if __name__ == "__main__":

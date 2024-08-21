@@ -12,7 +12,34 @@ class PMTasks:
         self.pm_tools = PMTools(client_id=client_id)
 
     def __project_workbook_elements(self):
-        return "Project Description, Key Deliverables, High-Level Risks, High-Level Milestones, Budget Summary, Stakeholders."
+        workbook_elements = [
+            "Project Description",
+            "Key Deliverables",
+            "High-Level Risks",
+            "High-Level Milestones",
+            "Budget Summary",
+            "Stakeholders",
+            "Project Plan Version",
+            "Approval Date",
+            "Subsidiary Plans Included",
+            "Current State of Strategy",
+            "Current State of People",
+            "Current State of Products",
+            "Current State of Processes",
+            "Scope Management Approach",
+            "Scope Statement",
+            "Scope Validation",
+            "Scope Control",
+            "Detailed Scope Description",
+            "Deliverables",
+            "Exclusions",
+            "Constraints",
+            "Assumptions",
+            "Approval Date",
+            "Key Milestones",
+        ]
+
+        return ", ".join(workbook_elements)
 
     def __tip_section(self):
         return "If you do your BEST WORK, you'll get a $10,000 bonus!"
@@ -60,12 +87,29 @@ class PMTasks:
             tools=[self.pm_tools.save_interview_questions],
         )
 
-    def update_project_workbook(self, agent):
+    def create_project_workbook_items(self, agent, interview_calls_transcript):
         return Task(
             description=dedent(
                 f"""
             **Task**: To create a project workbook for a client
-            **Description**: Create a comprehensive project workbook for a client, in accordance with the PMBOK Standard.
+            **Description**: Develop a focused project workbook based solely on the information provided in the client meeting transcripts. This workbook will adhere to PMBOK standards but will only include elements explicitly discussed or implied in the meetings. Any standard PMBOK components not covered in the transcripts will be omitted, ensuring the workbook accurately reflects the current state of project planning with the client. The workbook will serve as a clear, concise document capturing agreed-upon project elements, avoiding assumptions about undiscussed aspects. This approach ensures the workbook is a true representation of the client's understanding and agreements made during the recorded meetings
+            
+            **Interview Calls Transcript**:
+            {interview_calls_transcript}
+
+            **Note**: {self.__tip_section()}
+        """
+            ),
+            expected_output="A structured text with the project workbook elements and details",
+            agent=agent,
+        )
+
+    def update_project_workbook(self, agent):
+        return Task(
+            description=dedent(
+                f"""
+            **Task**: To update the details of a project workbook for a client
+            **Description**: Update the details of a client's project workbook based on the new fields created and ensure all information is accurate.
 
             **Note**: {self.__tip_section()}
         """

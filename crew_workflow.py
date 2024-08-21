@@ -46,10 +46,10 @@ class PMCrew:
         result = crew.kickoff()
         return result
 
-    def update_project_workbook(self, interview_call_transcript):
+    def update_project_workbook(self, interview_calls_transcript):
 
         # Assign onboarding form response to self
-        self.onboarding_form_response = interview_call_transcript
+        self.interview_calls_transcript = interview_calls_transcript
 
         # Assign agents to variables
         project_manager = self.agents.project_manager()
@@ -59,12 +59,12 @@ class PMCrew:
 
         # Create tasks and assign agents to them
         update_project_workbook = self.tasks.update_project_workbook(
-            agent=writing_agent,
+            agent=writing_agent, interview_calls_transcript=interview_calls_transcript
         )
 
-        answer_question_from_transcript = self.tasks.answer_question_from_transcript(
-            agent=project_manager, question=self.question
-        )
+        # answer_question_from_transcript = self.tasks.answer_question_from_transcript(
+        #     agent=project_manager, question=self.question
+        # )
 
         # Define Crew
         crew = Crew(
@@ -74,7 +74,7 @@ class PMCrew:
             ],
             tasks=[
                 update_project_workbook,
-                answer_question_from_transcript,
+                # answer_question_from_transcript,
             ],
             process=Process.sequential,
             verbose=True,
