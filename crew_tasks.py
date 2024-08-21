@@ -92,7 +92,9 @@ class PMTasks:
                 f"""
             **Task**: To create a project workbook for a client
             **Description**: Develop a focused project workbook based solely on the information provided in the client meeting transcripts. This workbook will adhere to PMBOK standards but will only include elements explicitly discussed or implied in the meetings. Any standard PMBOK components not covered in the transcripts will be omitted, ensuring the workbook accurately reflects the current state of project planning with the client. The workbook will serve as a clear, concise document capturing agreed-upon project elements, avoiding assumptions about undiscussed aspects. This approach ensures the workbook is a true representation of the client's understanding and agreements made during the recorded meetings
-            
+
+            **Elements of Project Workbook**: {self.__project_workbook_elements()}
+
             **Interview Calls Transcript**:
             {interview_calls_transcript}
 
