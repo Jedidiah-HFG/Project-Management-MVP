@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Dict
 from langchain.tools import tool
 
 # from crewai_tools import TXTSearchTool, PDFSearchTool
@@ -39,7 +39,6 @@ class PMTools:
         """
 
         try:
-
             # Generate the body of the interview questions
             children_body = PMTools.notion.create_toggleable_notion_block(
                 title="Interview Questions", content=interview_questions
@@ -52,34 +51,34 @@ class PMTools:
             return f"An error occurred while saving interview questions: {e}"
 
     class CreateProjectWorkbookInput(BaseModel):
-        project_title: float = Field(
-            description="The title of the project to create a workbook for"
+        workbook_contents: Dict = Field(
+            description="The contents of the project workbook. The keys represent the elements of the workbook, and the values are the details of the elements"
         )
-        project_description: float = Field(description="The description of the project")
 
     @tool(
         "create_project_workbook",
         args_schema=CreateProjectWorkbookInput,
         return_direct=True,
     )
-    def create_project_workbook(project_title: str, project_description: str) -> str:
+    def create_project_workbook_elements(workbook_contents: Dict) -> str:
         """
         Creates a new project workbook for a client
 
         Parameters:
-        - project_title (float): The title of the project to create a workbook for.
-        - project_description (float): The description of the project.
+        - workbook_contents (dict): The contents of the project workbook. The keys represent the elements of the workbook, and the values are the details of the elements.
 
         Returns:
         - A string representation of the result.
         """
 
-        # Define the output file name
-        output_file_path = "test.txt"
+        try:
+            # Generate the body of the interview questions
+            children_body = PMTools.notion.generate_project_workbook_body(
+                workbook_contents=workbook_contents
+            )
+            # Add the content to the page
+            PMTools.notion.add_content_to_page(children=children_body)
+            return "Workbook created successfully!"
 
-        # Open the file in append mode ('a') to add the output to the end of the file
-        with open(output_file_path, "a") as file:
-            file.write(f"Project Title: {project_title}\n")
-            file.write(f"Project Description: {project_description}\n\n")
-
-        return "Workbook created successfully!"
+        except Exception as e:
+            return f"An error occurred while saving interview questions: {e}"

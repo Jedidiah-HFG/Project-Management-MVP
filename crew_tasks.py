@@ -49,7 +49,7 @@ class PMTasks:
             description=dedent(
                 f"""
             **Task**: To create a short list of interviewing questions to ask a client during the first meeting
-            **Description**: Create a concise set of 5-7 open-ended questions for HFG to ask clients during initial meetings. These carefully crafted questions should efficiently gather key project details to populate a project workbook, building on information already provided in the onboarding form.
+            **Description**: Create a concise set of 5-7 open-ended questions for HFG to ask a client during their initial meeting. These carefully crafted questions should efficiently gather key project details to populate a project workbook, building on information already provided in the onboarding form.
 
             Key objectives:
             1. Limit the list to 5-7 impactful questions
@@ -86,12 +86,13 @@ class PMTasks:
             tools=[self.pm_tools.save_interview_questions],
         )
 
-    def create_project_workbook_items(self, agent, interview_calls_transcript):
+    def create_project_workbook_elements(self, agent, interview_calls_transcript):
         return Task(
             description=dedent(
                 f"""
             **Task**: To create a project workbook for a client
             **Description**: Develop a focused project workbook based solely on the information provided in the client meeting transcripts. This workbook will adhere to PMBOK standards but will only include elements explicitly discussed or implied in the meetings. Any standard PMBOK components not covered in the transcripts will be omitted, ensuring the workbook accurately reflects the current state of project planning with the client. The workbook will serve as a clear, concise document capturing agreed-upon project elements, avoiding assumptions about undiscussed aspects. This approach ensures the workbook is a true representation of the client's understanding and agreements made during the recorded meetings
+
 
             **Elements of Project Workbook**: {self.__project_workbook_elements()}
 
@@ -101,11 +102,11 @@ class PMTasks:
             **Note**: {self.__tip_section()}
         """
             ),
-            expected_output="A structured text with the project workbook elements and details",
+            expected_output="A structured text with the project workbook elements and their details",
             agent=agent,
         )
 
-    def update_project_workbook(self, agent):
+    def update_project_workbook_elements(self, agent):
         return Task(
             description=dedent(
                 f"""
@@ -117,7 +118,7 @@ class PMTasks:
             ),
             expected_output="Workbook created successfully!",
             agent=agent,
-            tools=[self.pm_tools.create_project_workbook],
+            tools=[self.pm_tools.create_project_workbook_elements],
         )
 
     def answer_question_from_transcript(self, agent, question):
@@ -133,5 +134,27 @@ class PMTasks:
         """
             ),
             expected_output="A through answer to the question based on the call transcript",
+            agent=agent,
+        )
+
+    def create_follow_up_interview_questions(self, agent):
+        return Task(
+            description=dedent(
+                f"""
+            **Task**: To create a short list of interviewing questions to ask a client during a follow-up meeting
+            **Description**: Create a concise set of 5-7 open-ended questions for HFG to ask a client during a followup meeting. These carefully crafted questions should efficiently gather key project details to populate the missing elements in project workbook.
+
+            Key objectives:
+            1. Limit the list to 5-7 impactful questions
+            2. Capture essential project elements not already populated in the project workbook
+            3. Allow for detailed, informative responses
+            4. Enable HFG to comprehensively fill out the project workbook
+
+            **Elements of Project Workbook**: {self.__project_workbook_elements()}
+
+            **Note**: {self.__tip_section()}
+        """
+            ),
+            expected_output="A list of questions to ask during a follow up interview",
             agent=agent,
         )

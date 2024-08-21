@@ -233,21 +233,21 @@ class Notion:
 
         return [content_block]
 
-    def generate_project_workbook_body(self, contents):
+    def generate_project_workbook_body(self, workbook_contents):
 
         children = []
 
-        children.append(
-            {
-                "type": "heading_1",
-                "heading_1": {
-                    "rich_text": [
-                        {"type": "text", "text": {"content": "Project Charter"}}
-                    ],
-                    "color": "red_background",
-                },
-            }
-        )
+        # children.append(
+        #     {
+        #         "type": "heading_1",
+        #         "heading_1": {
+        #             "rich_text": [
+        #                 {"type": "text", "text": {"content": "Project Charter"}}
+        #             ],
+        #             "color": "red_background",
+        #         },
+        #     }
+        # )
 
         def get_title_element(text_content):
             return {
@@ -258,7 +258,7 @@ class Notion:
                 },
             }
 
-        for key, value in contents.items():
+        for key, value in workbook_contents.items():
 
             title = key.replace("_", " ").title()
 

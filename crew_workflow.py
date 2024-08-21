@@ -58,13 +58,16 @@ class PMCrew:
         writing_agent = self.agents.writing_agent()
 
         # Create tasks and assign agents to them
-        update_project_workbook = self.tasks.update_project_workbook(
-            agent=writing_agent, interview_calls_transcript=interview_calls_transcript
-        )
 
-        # answer_question_from_transcript = self.tasks.answer_question_from_transcript(
-        #     agent=project_manager, question=self.question
-        # )
+        create_project_workbook_elements = self.tasks.create_project_workbook_elements(
+            agent=project_manager, interview_calls_transcript=interview_calls_transcript
+        )
+        update_project_workbook_elements = self.tasks.update_project_workbook_elements(
+            agent=writing_agent
+        )
+        create_follow_up_interview_questions = (
+            self.tasks.create_follow_up_interview_questions(agent=interviewing_agent)
+        )
 
         # Define Crew
         crew = Crew(
@@ -73,8 +76,9 @@ class PMCrew:
                 document_analyst,
             ],
             tasks=[
-                update_project_workbook,
-                # answer_question_from_transcript,
+                create_project_workbook_elements,
+                update_project_workbook_elements,
+                create_follow_up_interview_questions,
             ],
             process=Process.sequential,
             verbose=True,
