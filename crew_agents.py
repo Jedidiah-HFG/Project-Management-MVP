@@ -12,7 +12,7 @@ class PMAgents:
     def __init__(self):
 
         # Define models
-        self.OpenAI_GPT4o_mini = ChatOpenAI(model_name="gpt-4o", temperature=0.7)
+        self.OpenAI_GPT4o_mini = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.7)
 
         # For local llm
         # self.Ollama = Ollama(model="llama3.1", base_url="http://localhost:11434")

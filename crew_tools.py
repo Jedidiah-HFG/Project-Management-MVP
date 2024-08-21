@@ -39,12 +39,10 @@ class PMTools:
         """
 
         try:
-            # Generate the body of the interview questions
-            children_body = PMTools.notion.create_toggleable_notion_block(
+            # Add toggleable Notion block with the interview questions
+            PMTools.notion.add_toggleable_notion_block(
                 title="Interview Questions", content=interview_questions
             )
-            # Add the content to the page
-            PMTools.notion.add_content_to_page(children=children_body)
             return "Interviewing questions saved successfully!"
 
         except Exception as e:
@@ -72,12 +70,8 @@ class PMTools:
         """
 
         try:
-            # Generate the body of the interview questions
-            children_body = PMTools.notion.generate_project_workbook_body(
-                workbook_contents=workbook_contents
-            )
-            # Add the content to the page
-            PMTools.notion.add_content_to_page(children=children_body)
+            # Update the project workbook
+            PMTools.notion.update_project_workbook(workbook_contents=workbook_contents)
             return "Workbook created successfully!"
 
         except Exception as e:

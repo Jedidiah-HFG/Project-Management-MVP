@@ -94,7 +94,9 @@ def main():
     # Allow users select a client
     client_id = "new_client"
 
-    onboarding_tab, interview_tab = st.tabs(["Onboarding", "Interview"])
+    onboarding_tab, interview_tab, results_tab = st.tabs(
+        ["Onboarding", "Interview", "Results"]
+    )
 
     with onboarding_tab:
         # Get the onboarding form response
@@ -148,42 +150,12 @@ def main():
 
                 st.success(result)
 
+    with results_tab:
+        if "logs" not in st.session_state:
+            st.session_state["logs"] = {}
+
+        st.write(st.session_state["logs"])
+
 
 if __name__ == "__main__":
     main()
-
-
-# if False:
-
-#     # Allow user to upload their call transcript
-#     st.file_uploader("Upload your call transcript with the client")
-
-#     # Get the path for the call transcript
-#     file_path = client_data["call_transcript"]
-
-#     # Open the file in read mode
-#     with open(file_path, "r") as file:
-#         # Read the contents of the file
-#         file_contents = file.read()
-
-#     with st.expander("Initial Call Transcript"):
-#         # Display the contents of the file
-#         st.text(file_contents)
-
-#     with st.spinner("Creating project workbook"):
-#         # Read project workbook
-#         project_workbook = sample_data
-#         del project_workbook["interview_question"]
-
-#     # Save the project workbook to session state
-#     st.session_state["project_workbook"] = project_workbook
-
-#     with st.spinner("Saving project workbook"):
-#         # Generate project workbook body
-#         project_workbook_body = notion_api.generate_project_workbook_body(
-#             project_workbook
-#         )
-#         # Add project workbook to notion
-#         notion_api.add_content_to_page(children=project_workbook_body)
-
-#     st.success("Project workbook saved to Notion")

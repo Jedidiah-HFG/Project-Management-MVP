@@ -3,6 +3,7 @@ import json
 import requests
 import datetime
 import pytz
+import streamlit as st
 
 
 class Notion:
@@ -35,7 +36,7 @@ class Notion:
 
     def __init__(self, client_id: str):
 
-        self.dev = False
+        self.dev = True
 
         # Retrieve the Notion API key from environment variable
         NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
@@ -140,7 +141,21 @@ class Notion:
             print(response.text)
             return None
 
-    def add_content_to_page(self, children):
+    def _generate_bulleted_list_items(self, list_contents):
+        contents_list = []
+        for content in list_contents:
+            child = {
+                "object": "block",
+                "type": "bulleted_list_item",
+                "bulleted_list_item": {
+                    "rich_text": [{"type": "text", "text": {"content": content}}]
+                },
+            }
+            contents_list.append(child)
+
+        return contents_list
+
+    def _add_content_to_page(self, children):
         """
         Add content blocks to the Notion page.
 
@@ -149,6 +164,9 @@ class Notion:
 
         Prints success or failure message.
         """
+
+        if self.dev:
+            return
 
         # Create the request body
         data = {"children": children}
@@ -189,21 +207,7 @@ class Notion:
             )
             print(response.text)
 
-    def _generate_bulleted_list_items(self, list_contents):
-        contents_list = []
-        for content in list_contents:
-            child = {
-                "object": "block",
-                "type": "bulleted_list_item",
-                "bulleted_list_item": {
-                    "rich_text": [{"type": "text", "text": {"content": content}}]
-                },
-            }
-            contents_list.append(child)
-
-        return contents_list
-
-    def create_toggleable_notion_block(self, title, content):
+    def add_toggleable_notion_block(self, title, content):
         """
         Create a toggleable Notion block with a title and content, either as plain text or a bulleted list.
 
@@ -240,9 +244,14 @@ class Notion:
                 }
             ]
 
-        return [content_block]
+        st.session_state["logs"][title] = content
 
-    def generate_project_workbook_body(self, workbook_contents):
+        # Add the content to the page
+        self._add_content_to_page(children=[content_block])
+
+        return
+
+    def update_project_workbook(self, workbook_contents):
 
         children = []
 
@@ -269,6 +278,7 @@ class Notion:
 
         for key, value in workbook_contents.items():
 
+            # Convert the key to title case
             title = key.replace("_", " ").title()
 
             # Add the title element
@@ -276,4 +286,9 @@ class Notion:
             # Add the bulleted list items
             children.extend(self._generate_bulleted_list_items(value))
 
-        return children
+            st.session_state["logs"][title] = value
+
+        # Add the content to the page
+        self._add_content_to_page(children=children)
+
+        return
