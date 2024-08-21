@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import datetime
 
 
 class Notion:
@@ -99,7 +100,11 @@ class Notion:
         notion_page_emoji = self.client_data["notion_page_emoji"]
         notion_page_cover_url = self.client_data["notion_page_cover_url"]
 
-        page_title = f"{client_name}'s Workbook"
+        # Get the current date and time and format it
+        formatted_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+
+        # Create the page title with the date and time
+        page_title = f"{client_name}'s Workbook - {formatted_datetime}"
 
         # API endpoint for pages
         self.base_url = "https://api.notion.com/v1/pages"
@@ -146,7 +151,7 @@ class Notion:
         # Check the response
         if response.status_code == 200:
             print("Successfully updated page in Notion")
-      
+
         elif response.status_code == 400:
             error_data = response.json()
             if error_data.get(
