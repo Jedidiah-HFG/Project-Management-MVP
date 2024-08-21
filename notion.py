@@ -35,12 +35,12 @@ class Notion:
 
     def __init__(self, client_id: str):
 
-        self.dev = True
+        self.dev = False
 
         # Retrieve the Notion API key from environment variable
         NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
         if self.dev:
-            pass
+            return
 
         # Create the headers for the API requests
         self.headers = {
