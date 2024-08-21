@@ -59,7 +59,6 @@ class PMTasks:
             5. Avoid repetition of information from the onboarding form
 
             The goal is to maximize information gathering with minimal questioning, ensuring a focused and productive initial client meeting.
-            
 
             **Elements of Project Workbook**: {self.__project_workbook_elements()}
 
