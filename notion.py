@@ -2,6 +2,7 @@ import os
 import json
 import requests
 import datetime
+import pytz
 
 
 class Notion:
@@ -34,8 +35,12 @@ class Notion:
 
     def __init__(self, client_id: str):
 
+        self.dev = True
+
         # Retrieve the Notion API key from environment variable
         NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
+        if self.dev:
+            pass
 
         # Create the headers for the API requests
         self.headers = {
@@ -100,8 +105,12 @@ class Notion:
         notion_page_emoji = self.client_data["notion_page_emoji"]
         notion_page_cover_url = self.client_data["notion_page_cover_url"]
 
-        # Get the current date and time and format it
-        formatted_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        # Get the current date and time in EST
+        est = pytz.timezone("US/Eastern")
+        current_datetime_est = datetime.datetime.now(est)
+
+        # Format the date and time
+        formatted_datetime = current_datetime_est.strftime("%Y-%m-%d %H:%M")
 
         # Create the page title with the date and time
         page_title = f"{client_name}'s Workbook - {formatted_datetime}"
