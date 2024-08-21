@@ -68,17 +68,17 @@ class PMCrew:
         create_follow_up_interview_questions = (
             self.tasks.create_follow_up_interview_questions(agent=interviewing_agent)
         )
-
+        save_interview_questions = self.tasks.save_interview_questions(
+            agent=writing_agent
+        )
         # Define Crew
         crew = Crew(
-            agents=[
-                project_manager,
-                document_analyst,
-            ],
+            agents=[project_manager, writing_agent, interviewing_agent],
             tasks=[
                 create_project_workbook_elements,
                 update_project_workbook_elements,
                 create_follow_up_interview_questions,
+                save_interview_questions,
             ],
             process=Process.sequential,
             verbose=True,
