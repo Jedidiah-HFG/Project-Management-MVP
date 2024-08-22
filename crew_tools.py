@@ -18,8 +18,9 @@ class PMTools:
         self.get_pmbok_standards = None  # PDFSearchTool(pdf="data/PMBOK Guide.pdf")
 
     class SaveInterviewQuestionInput(BaseModel):
+        title: str = Field(description="The title of the interview questions")
         interview_questions: List[str] = Field(
-            description="A list of interview questions for the project"
+            description="A list of interview questions on the project"
         )
 
     @tool(
@@ -27,12 +28,12 @@ class PMTools:
         args_schema=SaveInterviewQuestionInput,
         return_direct=True,
     )
-    def save_interview_questions(interview_questions: List[str]) -> str:
+    def save_interview_questions(title: str, interview_questions: List[str]) -> str:
         """
         Saves the interviewing questions for a client
 
         Parameters:
-        - interview_questions (list[str]): The list of interview questions for the project.
+        - interview_questions (list[str]): The list of interview questions on the project.
 
         Returns:
         - A string representation of the result of the process.
@@ -41,7 +42,7 @@ class PMTools:
         try:
             # Add toggleable Notion block with the interview questions
             PMTools.notion.add_toggleable_notion_block(
-                title="Interview Questions", content=interview_questions
+                title=title, content=interview_questions
             )
             return "Interviewing questions saved successfully!"
 

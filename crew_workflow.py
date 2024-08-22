@@ -26,7 +26,7 @@ class PMCrew:
             onboarding_form_response=self.onboarding_form_response,
         )
         save_interview_questions = self.tasks.save_interview_questions(
-            agent=writing_agent
+            agent=writing_agent, title="First Interviewing Questions"
         )
 
         # Define Crew
@@ -69,7 +69,7 @@ class PMCrew:
             self.tasks.create_follow_up_interview_questions(agent=interviewing_agent)
         )
         save_interview_questions = self.tasks.save_interview_questions(
-            agent=writing_agent
+            agent=writing_agent, title="Recommended Follow-Up Questions"
         )
         # Define Crew
         crew = Crew(

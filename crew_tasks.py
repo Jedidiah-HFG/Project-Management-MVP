@@ -71,12 +71,12 @@ class PMTasks:
             agent=agent,
         )
 
-    def save_interview_questions(self, agent):
+    def save_interview_questions(self, agent, title):
         return Task(
             description=dedent(
                 f"""
             **Task**: To save a list of interviewing questions for a client
-            **Description**: Save a list of interviewing questions for a client.
+            **Description**: Save a list of interviewing questions for a client. The title should be {title}
 
             **Note**: {self.__tip_section()}
         """

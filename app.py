@@ -154,7 +154,32 @@ def main():
         if "logs" not in st.session_state:
             st.session_state["logs"] = {}
 
-        st.write(st.session_state["logs"])
+        def render_results(data):
+            rendered = []
+            for key, value in data.items():
+                # Add the key as a bold heading
+                key = key.upper()
+                rendered.append(f"**{key}**")
+
+                # Process the value
+                if isinstance(value, str):
+                    # If it's a string, add it with "- " prefix
+                    rendered.append(f"- {value}")
+                elif isinstance(value, list):
+                    # If it's a list, format each item with "- " prefix
+                    for item in value:
+                        rendered.append(f"- {item}")
+                else:
+                    # If it's neither string nor list, convert to string and add "- " prefix
+                    rendered.append(f"- {str(value)}")
+
+                # Add a blank line after each key-value pair
+                rendered.append("")
+
+            # Join all parts with newlines
+            return "\n".join(rendered)
+
+        st.write(render_results(st.session_state["logs"]))
 
 
 if __name__ == "__main__":
