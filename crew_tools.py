@@ -30,9 +30,10 @@ class PMTools:
     )
     def save_interview_questions(title: str, interview_questions: List[str]) -> str:
         """
-        Saves the interviewing questions for a client
+        Saves the interviewing questions for a client.
 
         Parameters:
+        - title str: The title of the interview questions.
         - interview_questions (list[str]): The list of interview questions on the project.
 
         Returns:
@@ -61,11 +62,13 @@ class PMTools:
     )
     def create_project_workbook_elements(workbook_contents: Dict) -> str:
         """
-        Creates a new project workbook for a client
+        Creates a new project workbook for a client.
 
         Parameters:
-        - workbook_contents (dict): The contents of the project workbook. The keys represent the elements of the workbook, and the values are the details of the elements.
-
+        - workbook_contents (dict): The contents of the project workbook. 
+        Keys are strings representing workbook sections/elements.
+        Values are either strings or lists of strings with section details.
+        
         Returns:
         - A string representation of the result.
         """
