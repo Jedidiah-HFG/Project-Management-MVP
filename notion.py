@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import requests
 import datetime
 import pytz
@@ -36,7 +37,7 @@ class Notion:
 
     def __init__(self, client_id: str):
 
-        self.dev = True
+        self.dev = False
 
         # Retrieve the Notion API key from environment variable
         NOTION_API_KEY = os.environ.get("NOTION_API_KEY")
@@ -157,55 +158,63 @@ class Notion:
 
     def _add_content_to_page(self, children):
         """
-        Add content blocks to the Notion page.
+        Add content blocks to the Notion page in batches of 10.
 
         Args:
             children (list): List of content blocks to add.
 
         Prints success or failure message.
         """
-
         if self.dev:
             return
 
-        # Create the request body
-        data = {"children": children}
+        batch_size = 50
+        for i in range(0, len(children), batch_size):
+            batch = children[i : i + batch_size]
 
-        url = f"https://api.notion.com/v1/blocks/{self.notion_page_id}/children"
-        # Make a PATCH request to update the block children
-        response = requests.patch(url, headers=self.headers, json=data)
+            # Create the request body for this batch
+            data = {"children": batch}
 
-        # Check the response
-        if response.status_code == 200:
-            print("Successfully updated page in Notion")
+            url = f"https://api.notion.com/v1/blocks/{self.notion_page_id}/children"
+            # Make a PATCH request to update the block children
+            response = requests.patch(url, headers=self.headers, json=data)
 
-        elif response.status_code == 400:
-            error_data = response.json()
-            if error_data.get(
-                "code"
-            ) == "validation_error" and "archived" in error_data.get("message", ""):
+            # Check the response
+            if response.status_code == 200:
                 print(
-                    "Block is archived or doesn't exist. Attempting to create a new block."
+                    f"Successfully updated page in Notion (batch {i//batch_size + 1})"
                 )
 
-                # Create a new page for the client and store the page ID
-                self.notion_page_id = self._create_page()
-                self.client_data["notion_page_id"] = self.notion_page_id
-                self._save_clients_data()
+            elif response.status_code == 400:
+                error_data = response.json()
+                if error_data.get(
+                    "code"
+                ) == "validation_error" and "archived" in error_data.get("message", ""):
+                    print(
+                        "Block is archived or doesn't exist. Attempting to create a new block."
+                    )
 
-                # Retry adding content to the new page
-                self.add_content_to_page(children)
+                    # Create a new page for the client and store the page ID
+                    self.notion_page_id = self._create_page()
+                    self.client_data["notion_page_id"] = self.notion_page_id
+                    self._save_clients_data()
 
+                    # Retry adding this batch to the new page
+                    self._add_content_to_page(batch)
+
+                else:
+                    print(
+                        f"Failed to update the block children (batch {i//batch_size + 1}). Status code: {response.status_code}"
+                    )
+                    print(response.text)
             else:
                 print(
-                    f"Failed to update the block children. Status code: {response.status_code}"
+                    f"Failed to update the block children (batch {i//batch_size + 1}). Status code: {response.status_code}"
                 )
                 print(response.text)
-        else:
-            print(
-                f"Failed to update the block children. Status code: {response.status_code}"
-            )
-            print(response.text)
+
+            # Add a small delay between batches to avoid rate limiting
+            time.sleep(1)
 
     def add_toggleable_notion_block(self, title, content):
         """
@@ -284,9 +293,13 @@ class Notion:
             # Add the title element
             children.append(get_title_element(title))
             # Add the bulleted list items
-            children.extend(self._generate_bulleted_list_items(value))
 
-            st.session_state["logs"][title] = value
+            if isinstance(value, list):
+                children.extend(self._generate_bulleted_list_items(value))
+            else:
+                children.extend(self._generate_bulleted_list_items([value]))
+
+            # st.session_state["logs"][title] = value
 
         # Add the content to the page
         self._add_content_to_page(children=children)
