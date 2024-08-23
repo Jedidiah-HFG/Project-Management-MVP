@@ -1,6 +1,7 @@
 import io
 from dotenv import load_dotenv
 import streamlit as st
+from notion import Notion
 from crew_workflow import PMCrew
 
 
@@ -91,8 +92,8 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # Allow users select a client
-    client_id = "Client 1"
+    all_clients = Notion.CLIENTS_DATA.keys()
+    client_id = st.selectbox("Clients", all_clients)
 
     onboarding_tab, interview_tab, results_tab = st.tabs(
         ["Onboarding", "Interview", "Results"]

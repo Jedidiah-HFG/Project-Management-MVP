@@ -35,6 +35,19 @@ class Notion:
         "yellow_background",
     ]
 
+    @staticmethod
+    def _load_clients_data():
+        """Load clients data from JSON file."""
+        try:
+            with open("clients.json", "r") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            print("clients.json not found. Creating an empty dictionary.")
+            return {}
+
+    # Load the clients data
+    CLIENTS_DATA = _load_clients_data()
+
     def __init__(self, client_id: str):
 
         self.dev = False
@@ -57,14 +70,11 @@ class Notion:
             "page_id": "343f6e7933e043629c38d81ee01d789f",
         }
 
-        # Load the clients data
-        self.CLIENTS_DATA = self._load_clients_data()
-
         # Store the client ID
         self.client_id = client_id
         # Retrieve the client data
-        self.client_data = self.CLIENTS_DATA.get(
-            client_id, self.CLIENTS_DATA["new_client"]
+        self.client_data = Notion.CLIENTS_DATA.get(
+            client_id, Notion.CLIENTS_DATA["new_client"]
         )
 
         self.notion_page_id = self.client_data["notion_page_id"]
@@ -74,15 +84,6 @@ class Notion:
             self.notion_page_id = self._create_page()
             self.client_data["notion_page_id"] = self.notion_page_id
             self._save_clients_data()
-
-    def _load_clients_data(self):
-        """Load clients data from JSON file."""
-        try:
-            with open("clients.json", "r") as f:
-                return json.load(f)
-        except FileNotFoundError:
-            print("clients.json not found. Creating an empty dictionary.")
-            return {}
 
     def _save_clients_data(self):
         """Save updated clients data to JSON file."""
