@@ -92,7 +92,7 @@ def main():
     )
 
     # Allow users select a client
-    client_id = "new_client"
+    client_id = "Client 1"
 
     onboarding_tab, interview_tab, results_tab = st.tabs(
         ["Onboarding", "Interview", "Results"]

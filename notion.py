@@ -299,7 +299,7 @@ class Notion:
             else:
                 children.extend(self._generate_bulleted_list_items([value]))
 
-            # st.session_state["logs"][title] = value
+            st.session_state["logs"][title] = value
 
         # Add the content to the page
         self._add_content_to_page(children=children)
