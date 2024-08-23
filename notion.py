@@ -104,8 +104,9 @@ class Notion:
 
         # Get the client's page details
         client_name = self.client_data["client_name"]
-        notion_page_emoji = self.client_data["notion_page_emoji"]
-        notion_page_cover_url = self.client_data["notion_page_cover_url"]
+
+        notion_page_emoji = "\ud83d\udc68\u200d\ud83d\udcbb"
+        notion_page_cover_url = "https://images.unsplash.com/photo-1526948531399-320e7e40f0ca?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
         # Get the current date and time in EST
         est = pytz.timezone("US/Eastern")
