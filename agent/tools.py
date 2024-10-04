@@ -9,7 +9,7 @@ from notion.notion import Notion
 class PMTools:
 
     # Define pmbok scrape tools
-    get_pmbok_standards = PDFSearchTool(
+    read_pmbok = PDFSearchTool(
         pdf="data/PMBOK Guide.pdf",
         config=dict(
             llm=dict(

@@ -30,6 +30,7 @@ class PMAgents:
                 """Develop comprehensive, PMBOK-aligned project workbooks that effectively cover all elements of project management, tailored to meet unique client needs"""
             ),
             llm=self.OpenAI_GPT4o_mini,
+            tools=[PMTools.read_pmbok],
         )
 
     def interviewing_agent(self):
@@ -65,6 +66,6 @@ class PMAgents:
             goal=dedent(
                 """Extract, analyze, and synthesize critical information from various project-related documents, ensuring comprehensive understanding and effective utilization of available data"""
             ),
-            tools=[PMTools.get_pmbok_standards],
             llm=self.OpenAI_GPT4o_mini,
+            tools=[PMTools.read_pmbok],
         )
