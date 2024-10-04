@@ -136,5 +136,4 @@ class PMCrew:
             #         dimension=embedder["dimension"],
             #     ),
             # ),
-            verbose=True,
         )
