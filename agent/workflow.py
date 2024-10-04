@@ -71,7 +71,12 @@ class PMCrew:
 
         # Define Crew
         crew = Crew(
-            agents=[project_manager, writing_agent, interviewing_agent],
+            agents=[
+                project_manager,
+                document_analyst,
+                writing_agent,
+                interviewing_agent,
+            ],
             tasks=[
                 create_project_workbook_elements,
                 update_project_workbook_elements,

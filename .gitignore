@@ -3,3 +3,4 @@ __pycache__
 .venv
 .env
 sample_data.json
+*.txt

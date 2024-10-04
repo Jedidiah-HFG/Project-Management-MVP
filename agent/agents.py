@@ -1,10 +1,10 @@
-import os
 from dotenv import load_dotenv
 
 from crewai import Agent
 from textwrap import dedent
 from langchain_openai import ChatOpenAI
 from langchain_community.llms import Ollama
+from agent.tools import PMTools
 
 
 class PMAgents:
@@ -65,6 +65,6 @@ class PMAgents:
             goal=dedent(
                 """Extract, analyze, and synthesize critical information from various project-related documents, ensuring comprehensive understanding and effective utilization of available data"""
             ),
-            # tools=[get_pmbok_standards, get_client_transcript],
+            tools=[PMTools.get_pmbok_standards],
             llm=self.OpenAI_GPT4o_mini,
         )

@@ -1,21 +1,39 @@
 from pydantic import BaseModel, Field
 from typing import List, Dict
-from langchain.tools import tool
 
-# from crewai_tools import TXTSearchTool, PDFSearchTool
+from crewai_tools import tool, PDFSearchTool
+from langchain.tools import tool
 from notion.notion import Notion
 
 
 class PMTools:
 
+    # Define pmbok scrape tools
+    get_pmbok_standards = PDFSearchTool(
+        pdf="data/PMBOK Guide.pdf",
+        config=dict(
+            llm=dict(
+                provider="openai",
+                config=dict(
+                    model="gpt-4o-mini",
+                    # temperature=0.5,
+                    # top_p=1,
+                    # stream=true,
+                ),
+            ),
+            embedder=dict(
+                provider="openai",
+                config=dict(
+                    model="gpt-4o-mini",
+                ),
+            ),
+        ),
+    )
+
     def __init__(self, client_id):
 
         # Create an instance of notion
         PMTools.notion = Notion(client_id=client_id)
-
-        # Define langchain tools
-        self.get_client_transcript = None  # TXTSearchTool(txt="data/Client Script for POC (2024-06-26 10_34 GMT-3) - Transcript.txt")
-        self.get_pmbok_standards = None  # PDFSearchTool(pdf="data/PMBOK Guide.pdf")
 
     class SaveInterviewQuestionInput(BaseModel):
         title: str = Field(description="The title of the interview questions")
@@ -65,10 +83,10 @@ class PMTools:
         Creates a new project workbook for a client.
 
         Parameters:
-        - workbook_contents (dict): The contents of the project workbook. 
+        - workbook_contents (dict): The contents of the project workbook.
         Keys are strings representing workbook sections/elements.
         Values are either strings or lists of strings with section details.
-        
+
         Returns:
         - A string representation of the result.
         """
