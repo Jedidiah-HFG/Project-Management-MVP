@@ -3,7 +3,7 @@ from typing import List, Dict
 from langchain.tools import tool
 
 # from crewai_tools import TXTSearchTool, PDFSearchTool
-from notion import Notion
+from notion.notion import Notion
 
 
 class PMTools:

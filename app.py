@@ -1,8 +1,8 @@
 import io
 from dotenv import load_dotenv
 import streamlit as st
-from notion import Notion
-from crew_workflow import PMCrew
+from notion.notion import Notion
+from agent.workflow import PMCrew
 
 
 def get_onboarding_form_response():
