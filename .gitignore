@@ -2,3 +2,4 @@ __pycache__
 .vscode
 .venv
 .env
+sample_data.json
