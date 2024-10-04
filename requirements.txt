@@ -1,4 +1,3 @@
-pysqlite3-binary>=0.4.6
 chromadb==0.4.24
 crewai==0.51.1
 crewai-tools==0.8.3

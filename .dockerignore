@@ -1,7 +1,0 @@
-__pycache__
-.vscode
-.venv
-.env
-data/sample_data.json
-data/call_transcript.txt
-data/Q-A.txt
